@@ -1,17 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{# @var location \App\Entity\Location #}
-{# @var measurements \App\Entity\Measurement[] #}
-
 {% block title %}Weather in {{ location.city }}, {{ location.country }}{% endblock %}
 
 {% block body %}
-    <main>
+    <main class="container mt-4">
         <h1>Weather in {{ location.city }}, {{ location.country }}</h1>
-        <ul>
+
+        <table class="table table-striped table-bordered mt-3">
+            <thead>
+            <tr>
+                <th>Data</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Pressure</th>
+                <th>Wind speed</th>
+            </tr>
+            </thead>
+            <tbody>
             {% for measurement in measurements %}
-                <li>{{ measurement.date|date('d.m.Y') }}: {{ measurement.celsius }}&deg;C</li>
+                <tr>
+                    <td>{{ measurement.date ? measurement.date|date('Y-m-d') : '' }}</td>
+                    <td>{{ measurement.celsius }} &deg;C</td>
+                    <td>{{ measurement.humidity ?? '-' }} %</td>
+                    <td>{{ measurement.pressure ?? '-' }} hPa</td>
+                    <td>{{ measurement.windSpeed ?? '-' }} m/s</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Brak pomiarów</td>
+                </tr>
             {% endfor %}
-        </ul>
+            </tbody>
+        </table>
     </main>
 {% endblock %}
