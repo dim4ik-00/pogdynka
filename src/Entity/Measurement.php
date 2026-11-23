@@ -22,7 +22,16 @@ class Measurement
     private ?\DateTime $date = null;
 
     #[ORM\Column]
-    private ?int $celsius = null;
+    private ?float $celsius = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $humidity = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $pressure = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $windSpeed = null;
 
     public function getId(): ?int
     {
@@ -53,15 +62,56 @@ class Measurement
         return $this;
     }
 
-    public function getCelsius(): ?int
+    public function getCelsius(): ?float
     {
         return $this->celsius;
     }
 
-    public function setCelsius(int $celsius): static
+    public function setCelsius(float $celsius): static
     {
         $this->celsius = $celsius;
 
         return $this;
+    }
+
+    public function getHumidity(): ?int
+    {
+        return $this->humidity;
+    }
+
+    public function setHumidity(?int $humidity): static
+    {
+        $this->humidity = $humidity;
+
+        return $this;
+    }
+
+    public function getPressure(): ?int
+    {
+        return $this->pressure;
+    }
+
+    public function setPressure(?int $pressure): static
+    {
+        $this->pressure = $pressure;
+
+        return $this;
+    }
+
+    public function getWindSpeed(): ?float
+    {
+        return $this->windSpeed;
+    }
+
+    public function setWindSpeed(?float $windSpeed): static
+    {
+        $this->windSpeed = $windSpeed;
+
+        return $this;
+    }
+
+    public function getFahrenheit(): float
+    {
+        return round(($this->getCelsius() * 9 / 5) + 32, 2);
     }
 }

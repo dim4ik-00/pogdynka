@@ -16,6 +16,9 @@ class MeasurementType extends AbstractType
         $builder
             ->add('date')
             ->add('celsius')
+            ->add('humidity')
+            ->add('pressure')
+            ->add('windSpeed')
             ->add('location', EntityType::class, [
                 'class' => Location::class,
                 'choice_label' => 'id',
